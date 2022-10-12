@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { signUpFirebase } from "../../firebase/auth/functions";
+import { signInFirebase } from "../../firebase/auth/functions";
 import { SignUpValidation } from "../../utils/validations/validation";
 import ButtonComponent from "../ButtonComponent";
 import InputComponent from "../InputComponent";
 import { useNavigate } from "react-router-dom";
-const SignUp = ({ signUp = signUpFirebase }) => {
+const SignIn = ({ signIn = signInFirebase }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const SignUp = ({ signUp = signUpFirebase }) => {
         return;
       }
       setLoading(true);
-      await signUp(email, password);
+      await signIn(email, password);
       navigate("/user");
     } catch ({ message }) {
       setApiError(message);
@@ -40,7 +40,7 @@ const SignUp = ({ signUp = signUpFirebase }) => {
         <div className="col-md-6 col-sm-10 mx-auto">
           <div className="card">
             <div className="card-body">
-              <h3>Crear Cuenta</h3>
+              <h3>Iniciar Sesión</h3>
               <hr />
               <form onSubmit={createAccount}>
                 <InputComponent
@@ -64,7 +64,7 @@ const SignUp = ({ signUp = signUpFirebase }) => {
                 <div className="mb-3 mt-3">
                   <ButtonComponent
                     color="primary"
-                    label="Crear cuenta"
+                    label="Iniciar Sesión"
                     id="btn-register"
                     type="submit"
                     isLoading={isLoading}
@@ -84,4 +84,4 @@ const SignUp = ({ signUp = signUpFirebase }) => {
   );
 };
 
-export default SignUp;
+export default SignIn;
